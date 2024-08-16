@@ -112,6 +112,18 @@ def show_tree(tree, total_width=60, fill=' '):
     print ('-' * total_width)
     return
 
+def stream_max(nums):
+    # return the list of the same length as nums
+    # where each element is the current max element in nums
+    result = []
+    heap = MaxHeap()
+    
+    for n in nums:
+        heap.insert(n)
+        result.append(heap.heap[0])
+    
+    return result
+
 heap = MaxHeap()
 heap.insert(100)
 heap.insert(99)
