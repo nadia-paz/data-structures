@@ -126,3 +126,32 @@ def stream_max(nums):
         result.append(heap.heap[0])
     
     return result
+
+def heap_sort(nums:list, ascending = True):
+    '''
+    Heap sort algorithm
+    '''
+    length = len(nums)
+    heap = MaxHeap()
+    result = [None for x in range(length)]
+    
+    for n in nums:
+        heap.insert(n)
+    if ascending:
+        for i in range(length):
+            result[length - i - 1] = heap.remove()
+            # print(result)
+    else:
+        for i in range(length):
+            result[i] = heap.remove()
+            # print(result)
+    return result
+
+nums = [67, 45, 34, 23, 1, 12, -9, 0]
+h = MaxHeap()
+for n in nums:
+    h.insert(n)
+show_tree(h.heap)
+print(h.heap)
+print("Ascending sort:", heap_sort(nums))
+print("Descending sort:", heap_sort(nums, ascending=False))
