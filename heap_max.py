@@ -34,7 +34,8 @@ class MaxHeap:
         self.heap[index1], self.heap[index2] = self.heap[index2], self.heap[index1]
     
     def _sink_down(self, index):
-        max_index = 0
+        max_index = index
+        
         while True:
             left_index = self._left_child(index)
             right_index = self._righ_child(index)
@@ -84,8 +85,10 @@ class MaxHeap:
         
         max_value = self.heap[0]
         self.heap[0] = self.heap.pop()
-        self._sink_down(0)
+        # important! size -= 1 BEFORE sink_down
         self.size -= 1
+        self._sink_down(0)
+
         return max_value
 
 
@@ -123,21 +126,3 @@ def stream_max(nums):
         result.append(heap.heap[0])
     
     return result
-
-heap = MaxHeap()
-heap.insert(100)
-heap.insert(99)
-heap.insert(75)
-heap.insert(58)
-heap.insert(72)
-heap.insert(61)
-heap.insert(32)
-
-print(heap.heap)
-print(heap.size)
-
-show_tree(heap.heap, 30)
-
-print(heap.remove())
-
-show_tree(heap.heap, 30)
