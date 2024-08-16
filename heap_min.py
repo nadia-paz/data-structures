@@ -1,6 +1,4 @@
 class MinHeap:
-    def __init__(self):
-        self.heap = []
 
     def __init__(self):
         self.heap = []
@@ -18,7 +16,7 @@ class MinHeap:
         self.heap[index1], self.heap[index2] = self.heap[index2], self.heap[index1]
     
     def _sink_down(self, index):
-        min_index = 0 
+        min_index = index
         
         lindex = self._left_child(index)
         rindex = self._right_child(index)
