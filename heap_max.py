@@ -147,6 +147,22 @@ def heap_sort(nums:list, ascending = True):
             # print(result)
     return result
 
+def find_kth_smallest1(nums, k):
+    # using heap sort N*log(N)
+    nums = heap_sort(nums)
+    # print(nums)
+    return nums[k-1]
+
+def find_kth_smallest(nums, k):
+    # no sorting algorithms O(N*log(k)?)
+    heap = MaxHeap()
+    for n in nums:
+        heap.insert(n)
+        if len(heap.heap) > k:
+            heap.remove()
+    return heap.remove()
+
+# TEST heap_sort
 nums = [67, 45, 34, 23, 1, 12, -9, 0]
 h = MaxHeap()
 for n in nums:
@@ -155,3 +171,17 @@ show_tree(h.heap)
 print(h.heap)
 print("Ascending sort:", heap_sort(nums))
 print("Descending sort:", heap_sort(nums, ascending=False))
+
+# TEST find_kth_smallest
+nums = [[3,2,1,5,6,4], [6,5,4,3,2,1], [1,2,3,4,5,6], [3,2,3,1,2,4,5,5,6]]
+ks = [2, 3, 4, 7]
+expected_outputs = [2, 3, 4, 5]
+
+for i in range(len(nums)):
+    print(f'Test case {i+1}...')
+    print(f'Input: {nums[i]} with k = {ks[i]}')
+    result = find_kth_smallest(nums[i], ks[i])
+    print(f'Output: {result}')
+    print(f'Expected output: {expected_outputs[i]}')
+    print(f'Test passed: {result == expected_outputs[i]}')
+    print('---------------------------------------')
