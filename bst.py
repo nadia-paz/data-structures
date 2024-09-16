@@ -44,6 +44,20 @@ class BinarySearchTree:
                 return True
         return False
     
+    def __r_contains(self, current_node, value):
+        """ recursive """
+        if current_node == None:
+            return False
+        if value == current_node.value:
+            return True
+        if value < current_node.value:
+            return self.__r_contains(current_node.left, value)
+        if value > current_node.value:
+            return self.__r_contains(current_node.right, value)
+
+    def r_contains(self, value):
+        return self.__r_contains(self.root, value)
+    
 def printTree(node, level=0):
         # node = self.root
         if node != None:
@@ -68,5 +82,5 @@ bst.insert(63)
 
 printTree(bst.root)
 
-print(bst.contains(20))
-print(bst.contains(17))
+print(bst.r_contains(20))
+print(bst.r_contains(17))
