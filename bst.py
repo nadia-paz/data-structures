@@ -17,7 +17,7 @@ class BinarySearchTree:
         # curr -> current_node
         while curr.left is not None:
             curr = curr.left
-        return curr
+        return curr.value
     
     ###### insert methods #########
 
@@ -91,7 +91,7 @@ class BinarySearchTree:
         if value < current_node.value:
             # 1
             current_node.left = self.__delete_node(current_node.left, value)
-        if value > current_node.value:
+        elif value > current_node.value:
             # 2
             current_node.right = self.__delete_node(current_node.right, value)
         else:
@@ -108,11 +108,17 @@ class BinarySearchTree:
                 # there is only left leaf and current node = left leaf
                 current_node = current_node.left
             else:
-                pass
+                # if the node has 2 leaves
+                # find the minimum value of the right leaf
+                subtree_min = self.min_value(current_node.right)
+                # reassign the value of the current node
+                current_node.value = subtree_min
+                # delete the node with the min value
+                current_node.right = self.__delete_node(current_node.right, subtree_min)
         return current_node
     
     def delete_node(self, value):
-        self.root = __r_delete_node(self.root, value)
+        self.root = self.__delete_node(self.root, value)
 
 def printTree(node, level=0):
         # node = self.root
@@ -135,10 +141,17 @@ bst.insert(29)
 bst.r_insert(63)
 bst.r_insert(28)
 
+printTree(bst.root)
+print("\n==================\n")
 
+bst.delete_node(17)
+bst.delete_node(27)
+printTree(bst.root)
+print("\n==================\n")
+bst.delete_node(43)
 
 printTree(bst.root)
 
-print(bst.r_contains(20))
-print(bst.contains(17))
-print(bst.r_contains(28))
+# print(bst.r_contains(20))
+# print(bst.contains(17))
+# print(bst.r_contains(28))
