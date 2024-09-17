@@ -76,7 +76,38 @@ class BinarySearchTree:
 
     def r_contains(self, value):
         return self.__r_contains(self.root, value)
+
+    ###### delete methods #########
+
+    def __delete_node(self, current_node, value):
+        if current_node is None:
+            return None
+        if value < current_node.value:
+            # 1
+            current_node.left = self.__delete_node(current_node.left, value)
+        if value > current_node.value:
+            # 2
+            current_node.right = self.__delete_node(current_node.right, value)
+        else:
+            # returns to the 1 or 2 or root
+            if current_node.left is None and current_node.right is None:
+                # the node doesn't have leaves
+                # None means that the current node will be set to None and removed
+                return None
+            elif current_node.left is None:
+                # there is only right leaf
+                # and it moves on the place of the current node
+                current_node = current_node.right
+            elif current_node.right is None:
+                # there is only left leaf and current node = left leaf
+                current_node = current_node.left
+            else:
+                pass
+        return current_node
     
+    def delete_node(self, value):
+        self.root = __r_delete_node(self.root, value)
+
 def printTree(node, level=0):
         # node = self.root
         if node != None:
