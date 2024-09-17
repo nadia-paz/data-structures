@@ -12,6 +12,8 @@ Complete Tree: Fills from Left to Right
 class BinarySearchTree:
     def __init__(self):
         self.root = None
+    
+    ###### insert methods #########
 
     def insert(self, value):
         new_node = Node(value)
@@ -32,6 +34,23 @@ class BinarySearchTree:
                     temp.right = new_node
                     return True
                 temp = temp.right
+
+    def __r_insert(self, current_node, value):
+        if current_node is None:
+            return Node(value) # linked to node.left or node.right through return
+        if value < current_node.value:
+            current_node.left =self.__r_insert(current_node.left, value)
+        if value > current_node.value:
+            current_node.right = self.__r_insert(current_node.right, value)
+        return current_node # returns the tree structure
+
+
+    def r_insert(self, value):
+        if self.root is None:
+            self.root = Node(value)
+        self.__r_insert(self.root, value)
+
+    ###### contain methods #########
 
     def contains(self, value):
         temp = self.root
@@ -76,11 +95,13 @@ bst.insert(49)
 bst.insert(19)
 bst.insert(17)
 bst.insert(29)
-bst.insert(63)
+bst.r_insert(63)
+bst.r_insert(28)
 
 
 
 printTree(bst.root)
 
 print(bst.r_contains(20))
-print(bst.r_contains(17))
+print(bst.contains(17))
+print(bst.r_contains(28))
