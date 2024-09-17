@@ -12,6 +12,12 @@ Complete Tree: Fills from Left to Right
 class BinarySearchTree:
     def __init__(self):
         self.root = None
+
+    def min_value(self, curr):
+        # curr -> current_node
+        while curr.left is not None:
+            curr = curr.left
+        return curr
     
     ###### insert methods #########
 
